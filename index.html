@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#030303">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Offline music player for files you own.">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Music">
+  <title>Music</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/icon-192.png" sizes="192x192">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./css/app.css">
+</head>
+<body>
+  <svg width="0" height="0" class="sprite" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></symbol>
+    <symbol id="i-explore" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-5.5-2.5 7.51-3.49L17.5 6.5 9.99 9.99 6.5 17.5z"/></symbol>
+    <symbol id="i-library" viewBox="0 0 24 24"><path fill="currentColor" d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-8 12.5v-9l6 4.5-6 4.5z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path fill="currentColor" d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path fill="currentColor" d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24"><path fill="currentColor" d="M10.59 9.17 5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><path fill="currentColor" d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></symbol>
+    <symbol id="i-thumb" viewBox="0 0 24 24"><path fill="currentColor" d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><path fill="currentColor" d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path fill="currentColor" d="M7.41 8.59 12 13.17l4.59-4.58L18 10l-6 6-6-6z"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path fill="currentColor" d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></symbol>
+    <symbol id="i-add" viewBox="0 0 24 24"><path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="currentColor" d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><path fill="currentColor" d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.49.49 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2z"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path fill="currentColor" d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></symbol>
+    <symbol id="i-delete" viewBox="0 0 24 24"><path fill="currentColor" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></symbol>
+  </svg>
+
+  <div id="boot" class="boot">
+    <div class="boot-mark"><svg class="ic xl"><use href="#i-note"></use></svg></div>
+    <div class="boot-name">Music</div>
+  </div>
+
+  <div id="app">
+    <main id="main">
+      <div id="sticky"></div>
+      <div id="view"></div>
+    </main>
+    <footer id="dock">
+      <div id="mini" class="mini" hidden>
+        <div class="mini-progress" aria-hidden="true"><div id="mini-bar"></div></div>
+        <button class="mini-hit" data-act="open-np" aria-label="Open player">
+          <div class="ph mini-art" id="mini-artbox" style="--h:0">
+            <svg class="ph-note" viewBox="0 0 24 24"><use href="#i-note"></use></svg>
+            <img id="mini-img" alt="">
+          </div>
+          <span class="mini-meta">
+            <span id="mini-title" class="mini-title"></span>
+            <span id="mini-artist" class="mini-artist"></span>
+          </span>
+        </button>
+        <button id="mini-like" class="icon-btn like" data-act="like-current" aria-label="Like" aria-pressed="false">
+          <svg class="ic"><use href="#i-thumb"></use></svg>
+        </button>
+        <button id="mini-play" class="icon-btn" data-act="toggle" aria-label="Play">
+          <svg class="ic"><use href="#i-play"></use></svg>
+        </button>
+      </div>
+      <nav class="tabs" aria-label="Primary">
+        <button class="tab" id="tab-home" data-act="tab" data-tab="home" aria-current="page">
+          <svg class="ic"><use href="#i-home"></use></svg><span>Home</span>
+        </button>
+        <button class="tab" id="tab-explore" data-act="tab" data-tab="explore">
+          <svg class="ic"><use href="#i-explore"></use></svg><span>Explore</span>
+        </button>
+        <button class="tab" id="tab-library" data-act="tab" data-tab="library">
+          <svg class="ic"><use href="#i-library"></use></svg><span>Library</span>
+        </button>
+      </nav>
+    </footer>
+  </div>
+
+  <div id="np" class="np" aria-hidden="true" inert>
+    <div class="np-top">
+      <button class="icon-btn" data-act="close-np" aria-label="Close player"><svg class="ic"><use href="#i-down"></use></svg></button>
+      <button class="np-from" id="np-from" data-act="np-album"></button>
+      <button class="icon-btn" data-act="menu-current" aria-label="More actions"><svg class="ic"><use href="#i-more"></use></svg></button>
+    </div>
+    <div id="np-body" class="np-body">
+      <div class="np-main">
+        <div class="ph np-art" id="np-artbox" style="--h:0">
+          <svg class="ph-note" viewBox="0 0 24 24"><use href="#i-note"></use></svg>
+          <img id="np-img" alt="">
+        </div>
+        <div class="np-titleline">
+          <div class="np-titles">
+            <div id="np-title" class="np-title"></div>
+            <button id="np-artist" class="np-artist" data-act="np-artist"></button>
+          </div>
+          <button id="np-like" class="icon-btn like" data-act="like-current" aria-label="Like" aria-pressed="false">
+            <svg class="ic"><use href="#i-thumb"></use></svg>
+          </button>
+        </div>
+        <div class="seek-wrap">
+          <input id="np-seek" class="seek" type="range" min="0" max="1000" value="0" aria-label="Seek" aria-valuemin="0" aria-valuemax="1000" aria-valuenow="0">
+          <div class="times"><span id="np-cur">0:00</span><span id="np-dur">0:00</span></div>
+        </div>
+        <div class="ctrls">
+          <button id="np-shuf" class="ctrl" data-act="shuffle" aria-label="Shuffle" aria-pressed="false"><svg class="ic"><use href="#i-shuffle"></use></svg></button>
+          <button id="np-prev" class="ctrl" data-act="prev" aria-label="Previous"><svg class="ic lg"><use href="#i-prev"></use></svg></button>
+          <button id="np-play" class="play-big" data-act="toggle" aria-label="Play"><svg class="ic xl"><use href="#i-play"></use></svg></button>
+          <button id="np-next" class="ctrl" data-act="next" aria-label="Next"><svg class="ic lg"><use href="#i-next"></use></svg></button>
+          <button id="np-rep" class="ctrl" data-act="repeat" aria-label="Repeat off" aria-pressed="false"><svg class="ic"><use href="#i-repeat"></use></svg></button>
+        </div>
+        <label class="vol">
+          <svg class="ic"><use href="#i-note"></use></svg>
+          <input id="np-vol" type="range" min="0" max="100" value="100" aria-label="Volume">
+        </label>
+      </div>
+      <section id="qscroll" class="qscroll" aria-label="Up next">
+        <h2>Up next <span id="qcount" class="qcount"></span></h2>
+        <div id="qhost"></div>
+      </section>
+    </div>
+  </div>
+
+  <div id="sheet" hidden></div>
+  <div id="overlay" hidden></div>
+  <div id="toast" hidden role="status"></div>
+  <div id="drop" hidden>Drop music to add it</div>
+  <audio id="player-audio" preload="none"></audio>
+  <input id="file-input" class="filepick" type="file" accept="audio/*,.mp3,.m4a,.mp4,.aac,.ogg,.oga,.opus,.wav,.flac,.webm,.aiff,.aif" multiple>
+  <input id="dir-input" class="filepick" type="file" webkitdirectory directory multiple>
+
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
